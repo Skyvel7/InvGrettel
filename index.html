@@ -16,9 +16,9 @@
         /* --- Configuración Global --- */
         :root {
             --color-principal-rojo: #A60000;
-            --color-fondo-seccion: #fdf0f0; /* Un rojo/rosa muy pálido */
+            --color-fondo-seccion: #fdf3f3;
             --color-texto: #333333;
-            --color-fondo: #fdf9f6;
+            --color-fondo: #fdf9f6; /* Fondo general de la página */
             --fuente-titulo: 'Playfair+Display', serif;
             --fuente-script: 'Great+Vibes', cursive;
             --fuente-cuerpo: 'Lato', sans-serif;
@@ -29,10 +29,8 @@
             padding: 0;
             font-family: var(--fuente-cuerpo);
             background-color: var(--color-fondo);
-            /* --- ¡NUEVO! Fondo Floral --- */
             background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="petal" width="20" height="20" viewBox="0 0 20 20" patternUnits="userSpaceOnUse"><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(45 10 10)"/><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(135 10 10)"/><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(225 10 10)"/><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(315 10 10)"/></pattern></defs><rect x="0" y="0" width="100%" height="100%" fill="url(%23petal)"/></svg>');
             background-repeat: repeat;
-            /* --------------------------- */
             color: var(--color-texto);
             line-height: 1.6;
         }
@@ -65,31 +63,15 @@
             z-index: -1;
         }
 
-        .hero-text {
+        .hero-title-image {
             z-index: 1;
             margin-top: -10vh;
+            width: 90%;
+            max-width: 500px;
+            height: auto;
+            filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.7));
         }
-
-        .hero-text h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #ffffff;
-            font-weight: 400;
-            font-family: var(--fuente-titulo);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .hero-text .script-name {
-            font-family: 'Playfair Display', serif; /* <-- CAMBIO DE FUENTE */
-            font-style: italic; /* <-- AÑADIDO */
-            font-size: 5.0rem; /* Un poco más pequeña para que quepa bien */
-            color: #ffffff; /* <-- CAMBIO A BLANCO */
-            margin: -10px 0 10px 0;
-            line-height: 1.1;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-        }
-
+        
         .scroll-indicator {
             position: absolute;
             bottom: 30px;
@@ -106,16 +88,23 @@
             60% { transform: translateX(-50%) translateY(-10px); }
         }
 
-
-        /* --- Contenedor Principal --- */
         .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px 0;
-            background-color: #ffffff;
+            background-color: #fdfcf9; /* Color 'Marfil' o 'Hueso' */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             position: relative;
             z-index: 2;
+        }
+
+        /* --- ¡ACTUALIZADO! Separador floral --- */
+        .floral-separator {
+            display: block; /* Asegura que sea un bloque */
+            width: 100%;
+            max-width: 250px; /* Tamaño reducido */
+            height: auto;
+            margin: 40px auto; /* 'auto' en los lados lo centra */
         }
 
         section, footer {
@@ -254,8 +243,8 @@
             font-size: 1.1rem;
             padding: 12px 5px;
             border-bottom: 1px dashed #ddd;
-            display: flex; /* Permite alinear icono y texto */
-            align-items: center; /* Centra verticalmente */
+            display: flex;
+            align-items: center;
         }
 
         .itinerary-list li:last-child { border-bottom: none; }
@@ -268,12 +257,11 @@
             width: 80px;
         }
 
-        /* --- ¡NUEVO! Icono dentro del itinerario --- */
         .itinerary-list .itinerary-icon {
             font-size: 1.2rem;
             color: var(--color-principal-rojo);
             margin-right: 10px;
-            width: 25px; /* Para que todos los iconos tengan el mismo espacio */
+            width: 25px;
             text-align: center;
         }
 
@@ -294,11 +282,9 @@
 <body>
 
     <div class="hero-section">
-        <div class="hero-text">
-            <h1>Mis XV Años</h1>
-            <h1 class="script-name">Grettel</h1>
-        </div>
-        <div class="scroll-indicator">&#x2193;</div> </div>
+        <img src="titulo-grettel-arco.png" alt="Mis XV Años Grettel" class="hero-title-image">
+        <div class="scroll-indicator">&#x2193;</div> 
+    </div>
 
     <div class="container">
 
@@ -310,6 +296,7 @@
             </p>
         </section>
 
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
         
         <img src="foto2.jpg" alt="Foto de Grettel 2" class="content-photo">
 
@@ -334,6 +321,7 @@
             </p>
         </section>
 
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
         
         <img src="foto3.jpg" alt="Foto de Grettel 3" class="content-photo">
 
@@ -360,6 +348,8 @@
             </div>
         </section>
 
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
+
         <section class="dress-code section-with-bg">
             <div class="section-title">
                 <i class="fa-solid fa-user-tie icon-style"></i>
@@ -372,6 +362,7 @@
         
         <img src="foto4.jpg" alt="Foto de Grettel 4" class="content-photo">
 
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
 
         <section class="itinerary section-with-bg">
             <div class="section-title">
@@ -390,6 +381,7 @@
         
         <img src="foto5.jpg" alt="Foto de Grettel 5" class="content-photo">
 
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
 
         <section class="gifts">
             <div class="section-title">
