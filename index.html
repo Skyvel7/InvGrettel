@@ -16,9 +16,9 @@
         /* --- Configuración Global --- */
         :root {
             --color-principal-rojo: #A60000;
-            --color-fondo-seccion: #fdf3f3;
+            --color-fondo-seccion: #fdf3f3; /* Rosa pálido */
             --color-texto: #333333;
-            --color-fondo: #fdf9f6; /* Fondo general de la página */
+            --color-fondo: #fdf9f6; 
             --fuente-titulo: 'Playfair+Display', serif;
             --fuente-script: 'Great+Vibes', cursive;
             --fuente-cuerpo: 'Lato', sans-serif;
@@ -29,10 +29,11 @@
             padding: 0;
             font-family: var(--fuente-cuerpo);
             background-color: var(--color-fondo);
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="petal" width="20" height="20" viewBox="0 0 20 20" patternUnits="userSpaceOnUse"><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(45 10 10)"/><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(135 10 10)"/><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(225 10 10)"/><path d="M10 0 C15 5 15 15 10 20 C5 15 5 5 10 0" fill="%23fbe9e9" opacity="0.6" transform="rotate(315 10 10)"/></pattern></defs><rect x="0" y="0" width="100%" height="100%" fill="url(%23petal)"/></svg>');
-            background-repeat: repeat;
+            background-repeat: no-repeat;
+            background-size: cover;
             color: var(--color-texto);
             line-height: 1.6;
+            position: relative;
         }
 
         /* --- Portada Principal (Fullscreen) --- */
@@ -42,11 +43,12 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             color: #ffffff;
             text-align: center;
             overflow: hidden;
+            padding-top: 5vh;
         }
 
         .hero-section::before {
@@ -65,9 +67,8 @@
 
         .hero-title-image {
             z-index: 1;
-            margin-top: -10vh;
-            width: 90%;
-            max-width: 500px;
+            width: 95%;
+            max-width: 550px;
             height: auto;
             filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.7));
         }
@@ -92,29 +93,39 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px 0;
-            background-color: #fdfcf9; /* Color 'Marfil' o 'Hueso' */
+            background-color: var(--color-fondo-seccion); /* Color rosa pálido como base */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             position: relative;
             z-index: 2;
+            overflow: hidden;
+
+            background-image: url('lateral1.png'), url('lateral2.png'); 
+            background-repeat: repeat-y, repeat-y;
+            background-position: left top, right top; 
+            background-size: 150px auto, 150px auto; 
         }
 
-        /* --- ¡ACTUALIZADO! Separador floral --- */
         .floral-separator {
-            display: block; /* Asegura que sea un bloque */
+            display: block;
             width: 100%;
-            max-width: 250px; /* Tamaño reducido */
+            max-width: 300px; 
             height: auto;
-            margin: 40px auto; /* 'auto' en los lados lo centra */
+            margin: 40px auto; 
+            position: relative; 
+            z-index: 4; 
         }
 
         section, footer {
             text-align: center;
             margin-bottom: 45px;
             padding: 10px 25px;
+            position: relative; 
+            z-index: 3;
         }
 
+        /* --- ¡ACTUALIZADO! Fondo de sección transparente --- */
         section.section-with-bg {
-            background-color: var(--color-fondo-seccion);
+            background-color: transparent; /* ¡ESTA ES LA CORRECCIÓN! */
             padding-top: 30px;
             padding-bottom: 30px;
             margin-bottom: 45px;
@@ -160,6 +171,15 @@
         p {
             font-size: 1rem;
             color: #555;
+        }
+
+        /* --- ¡NUEVO! Estilo para el texto de la dirección --- */
+        .address-text {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #777;
+            margin-top: 8px;
+            padding: 0 20px;
         }
 
         .intro-text {
@@ -276,6 +296,23 @@
             font-size: 1.2rem;
             font-weight: 700;
         }
+        
+        /* --- Media Queries para móviles --- */
+        @media (max-width: 900px) {
+            .container {
+                background-size: 100px auto, 100px auto; 
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                background-size: 80px auto, 80px auto; 
+            }
+        }
+        @media (max-width: 450px) {
+            .container {
+                background-size: 60px auto, 60px auto; 
+            }
+        }
 
     </style>
 </head>
@@ -336,7 +373,8 @@
                 <h3>Misa</h3>
                 <p>6:00 PM</p>
                 <p>Iglesia María de Guadalupe</p>
-                <a href="#" class="map-link">VER UBICACIÓN</a>
+                <a href="https://maps.app.goo.gl/sdv7RgVUKikPWowU6" class="map-link">VER UBICACIÓN</a>
+                <p class="address-text">Calle Prol. Morelos 52, El Triangulito, 60993 Las Guacamayas, Mich.</p>
             </div>
 
             <div class="event-location">
@@ -344,11 +382,12 @@
                 <h3>Recepción</h3>
                 <p>8:00 PM</p>
                 <p>Salón Los Ángeles</p>
-                <a href="#" class="map-link">VER UBICACIÓN</a>
+                <a href="https://maps.app.goo.gl/DRco1a5TL4ogAq4n9" class="map-link">VER UBICACIÓN</a>
+                <p class="address-text">Zamora, Lázaro Cárdenas, Ejidal, 60994 Las Guacamayas, Mich.</p>
             </div>
         </section>
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
 
         <section class="dress-code section-with-bg">
             <div class="section-title">
@@ -359,10 +398,11 @@
             <p><span>(Rojo y dorado reservado para la quinceañera)</span></p>
         </section>
         
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
         
         <img src="foto4.jpg" alt="Foto de Grettel 4" class="content-photo">
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
 
         <section class="itinerary section-with-bg">
             <div class="section-title">
@@ -378,10 +418,11 @@
             </ul>
         </section>
 
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
         
         <img src="foto5.jpg" alt="Foto de Grettel 5" class="content-photo">
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
+        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
 
         <section class="gifts">
             <div class="section-title">
