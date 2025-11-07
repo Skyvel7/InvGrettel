@@ -34,6 +34,77 @@
             color: var(--color-texto);
             line-height: 1.6;
             position: relative;
+            overflow-x: hidden; /* Evita scroll horizontal */
+        }
+
+        /* --- ¡NUEVO! Pantalla del Sobre --- */
+        #envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--color-principal-rojo);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            cursor: pointer;
+            transition: opacity 1s ease-out;
+        }
+        .envelope-icon {
+            font-size: 10rem;
+            color: #ffffff;
+            animation: pulse 1.5s infinite;
+        }
+        .envelope-text {
+            font-family: var(--fuente-titulo);
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+        
+        /* Animación de "latido" para el sobre */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- ¡NUEVO! Animaciones de fundido --- */
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- ¡NUEVO! Botón de Música --- */
+        #music-toggle-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-principal-rojo);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            display: flex; /* Centra el icono */
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: none; /* Oculto al inicio */
         }
 
         /* --- Portada Principal (Fullscreen) --- */
@@ -56,8 +127,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 150%;
+            height: 150%;
             background-image: url('foto1.jpg'); /* Tu foto principal */
             background-size: cover;
             background-position: center;
@@ -102,7 +173,7 @@
             background-image: url('lateral1.png'), url('lateral2.png'); 
             background-repeat: repeat-y, repeat-y;
             background-position: left top, right top; 
-            background-size: 150px auto, 150px auto; 
+            background-size: 300px auto, 300px auto; 
         }
 
         .floral-separator {
@@ -122,10 +193,9 @@
             position: relative; 
             z-index: 3;
         }
-
-        /* --- ¡ACTUALIZADO! Fondo de sección transparente --- */
+        
         section.section-with-bg {
-            background-color: transparent; /* ¡ESTA ES LA CORRECCIÓN! */
+            background-color: transparent; 
             padding-top: 30px;
             padding-bottom: 30px;
             margin-bottom: 45px;
@@ -172,8 +242,7 @@
             font-size: 1rem;
             color: #555;
         }
-
-        /* --- ¡NUEVO! Estilo para el texto de la dirección --- */
+        
         .address-text {
             font-size: 0.9rem;
             font-style: italic;
@@ -318,130 +387,196 @@
 </head>
 <body>
 
-    <div class="hero-section">
-        <img src="titulo-grettel-arco.png" alt="Mis XV Años Grettel" class="hero-title-image">
-        <div class="scroll-indicator">&#x2193;</div> 
+    <div id="envelope-overlay">
+        <i class="fa-solid fa-envelope envelope-icon"></i>
+        <p class="envelope-text">Haz clic para abrir la invitación</p>
     </div>
 
-    <div class="container">
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 
-        <section class="intro">
-            <p class="intro-text">
-                "En este cuento de hadas, hoy me toca a mi sentirme como una
-                princesa… pero en mi sueño encantado, todos son protagonistas de este cuento
-                feliz, inolvidable y mágico."
-            </p>
-        </section>
+    <main id="invitation-content" style="display: none;">
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
-        
-        <img src="foto2.jpg" alt="Foto de Grettel 2" class="content-photo">
+        <div class="hero-section">
+            <img src="titulo-grettel-arco.png" alt="Mis XV Años Grettel" class="hero-title-image">
+            <div class="scroll-indicator">&#x2193;</div> 
+        </div>
 
+        <div class="container">
 
-        <section class="family">
-            <div class="section-title">
-                <h2>Con el amor de mis Padres</h2>
-            </div>
-            <p class="family-names">
-                Francisco Carlón Romero
-                <br>&<br>
-                Rubí Valdovinos Pescador
-            </p>
+            <section class="intro">
+                <p class="intro-text">
+                    "En este cuento de hadas, hoy me toca a mi sentirme como una
+                    princesa… pero en mi sueño encantado, todos son protagonistas de este cuento
+                    feliz, inolvidable y mágico."
+                </p>
+            </section>
 
-            <div class="section-title" style="margin-top: 30px;">
-                <h2>Y mis Padrinos</h2>
-            </div>
-            <p class="family-names">
-                Francisco Virelas Llamas
-                <br>&<br>
-                Claudia Reyes Lozano
-            </p>
-        </section>
-
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
-        
-        <img src="foto3.jpg" alt="Foto de Grettel 3" class="content-photo">
+            <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
+            
+            <img src="foto2.jpg" alt="Foto de Grettel 2" class="content-photo">
 
 
-        <section class="event-details">
-            <p>SÁBADO</p>
-            <div class="date-day">29</div>
-            <div class="date-month-year">Noviembre 2025</div>
+            <section class="family">
+                <div class="section-title">
+                    <h2>Con el amor de mis Padres</h2>
+                </div>
+                <p class="family-names">
+                    Francisco Carlón Romero
+                    <br>&<br>
+                    Rubí Valdovinos Pescador
+                </p>
 
-            <div class="event-location">
-                <i class="fa-solid fa-church icon-style"></i>
-                <h3>Misa</h3>
-                <p>6:00 PM</p>
-                <p>Iglesia María de Guadalupe</p>
-                <a href="https://maps.app.goo.gl/sdv7RgVUKikPWowU6" class="map-link">VER UBICACIÓN</a>
-                <p class="address-text">Calle Prol. Morelos 52, El Triangulito, 60993 Las Guacamayas, Mich.</p>
-            </div>
+                <div class="section-title" style="margin-top: 30px;">
+                    <h2>Y mis Padrinos</h2>
+                </div>
+                <p class="family-names">
+                    Francisco Virelas Llamas
+                    <br>&<br>
+                    Claudia Reyes Lozano
+                </p>
+            </section>
 
-            <div class="event-location">
-                <i class="fa-solid fa-glass-cheers icon-style"></i>
-                <h3>Recepción</h3>
-                <p>8:00 PM</p>
-                <p>Salón Los Ángeles</p>
-                <a href="https://maps.app.goo.gl/DRco1a5TL4ogAq4n9" class="map-link">VER UBICACIÓN</a>
-                <p class="address-text">Zamora, Lázaro Cárdenas, Ejidal, 60994 Las Guacamayas, Mich.</p>
-            </div>
-        </section>
+            <img src="rosashori.png" alt="Adorno Floral" class="floral-separator">
+            
+            <img src="foto3.jpg" alt="Foto de Grettel 3" class="content-photo">
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
 
-        <section class="dress-code section-with-bg">
-            <div class="section-title">
-                <i class="fa-solid fa-user-tie icon-style"></i>
-                <h2>Código de Vestimenta</h2>
-            </div>
-            <p>Formal</p>
-            <p><span>(Rojo y dorado reservado para la quinceañera)</span></p>
-        </section>
-        
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
-        
-        <img src="foto4.jpg" alt="Foto de Grettel 4" class="content-photo">
+            <section class="event-details">
+                <p>SÁBADO</p>
+                <div class="date-day">29</div>
+                <div class="date-month-year">Noviembre 2025</div>
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
+                <div class="event-location">
+                    <i class="fa-solid fa-church icon-style"></i>
+                    <h3>Misa</h3>
+                    <p>6:00 PM</p>
+                    <p>Iglesia María de Guadalupe</p>
+                    <a href="#" class="map-link">VER UBICACIÓN</a>
+                    <p class="address-text">Calle Prol. Morelos 52, El Triangulito, 60993 Las Guacamayas, Mich.</p>
+                </div>
 
-        <section class="itinerary section-with-bg">
-            <div class="section-title">
-                <i class="fa-solid fa-list-ol icon-style"></i>
-                <h2>Itinerario</h2>
-            </div>
-            <ul class="itinerary-list">
-                <li><i class="fa-solid fa-cross itinerary-icon"></i><span>6:00 PM</span> Misa</li>
-                <li><i class="fa-solid fa-champagne-glasses itinerary-icon"></i><span>8:00 PM</span> Recepción</li>
-                <li><i class="fa-solid fa-mask itinerary-icon"></i><span>9:00 PM</span> Vals</li>
-                <li><i class="fa-solid fa-utensils itinerary-icon"></i><span>10:30 PM</span> Cena</li>
-                <li><i class="fa-solid fa-compact-disc itinerary-icon"></i><span>11:00 PM</span> Baile</li>
-            </ul>
-        </section>
+                <div class="event-location">
+                    <i class="fa-solid fa-glass-cheers icon-style"></i>
+                    <h3>Recepción</h3>
+                    <p>8:00 PM</p>
+                    <p>Salón Los Ángeles</p>
+                    <a href="#" class="map-link">VER UBICACIÓN</a>
+                    <p class="address-text">Zamora, Lázaro Cárdenas, Ejidal, 60994 Las Guacamayas, Mich.</p>
+                </div>
+            </section>
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
-        
-        <img src="foto5.jpg" alt="Foto de Grettel 5" class="content-photo">
+            <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
 
-        <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
+            <section class="dress-code section-with-bg">
+                <div class="section-title">
+                    <i class="fa-solid fa-user-tie icon-style"></i>
+                    <h2>Código de Vestimenta</h2>
+                </div>
+                <p>Formal</p>
+                <p><span>(Rojo y dorado reservado para la quinceañera)</span></p>
+            </section>
+            
+          
+            
+            <img src="foto4.jpg" alt="Foto de Grettel 4" class="content-photo">
 
-        <section class="gifts">
-            <div class="section-title">
-                <i class="fa-solid fa-gift icon-style"></i>
-                <h2>Sugerencia de Regalo</h2>
-            </div>
-            <p>
-                Deseo facilitar tu elección del regalo perfecto, si decides
-                obsequiarme algo prefiero que sea en efectivo y depositarlo el día del evento.
-            </p>
-        </section>
+            
+            <section class="itinerary section-with-bg">
+                <div class="section-title">
+                    <i class="fa-solid fa-list-ol icon-style"></i>
+                    <h2>Itinerario</h2>
+                </div>
+                <ul class="itinerary-list">
+                    <li><i class="fa-solid fa-cross itinerary-icon"></i><span>6:00 PM</span> Misa</li>
+                    <li><i class="fa-solid fa-champagne-glasses itinerary-icon"></i><span>8:00 PM</span> Recepción</li>
+                    <li><i class="fa-solid fa-mask itinerary-icon"></i><span>9:00 PM</span> Vals</li>
+                    <li><i class="fa-solid fa-utensils itinerary-icon"></i><span>10:30 PM</span> Cena</li>
+                    <li><i class="fa-solid fa-compact-disc itinerary-icon"></i><span>11:00 PM</span> Baile</li>
+                </ul>
+            </section>
 
-        <footer>
-            <p>
-                Mis XV años serán más especiales si los disfrutas a mi lado,
-                <br>
-                ¡muchas gracias, te esperamos!
-            </p>
-        </footer>
+            <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
+            
+            <img src="foto5.jpg" alt="Foto de Grettel 5" class="content-photo">
 
-    </div> </body>
+            <img src="rosashori.png" alt="Adorno Floral" class="floral-separator"> 
+
+            <section class="gifts">
+                <div class="section-title">
+                    <i class="fa-solid fa-gift icon-style"></i>
+                    <h2>Sugerencia de Regalo</h2>
+                </div>
+                <p>
+                    Deseo facilitar tu elección del regalo perfecto, si decides
+                    obsequiarme algo prefiero que sea en efectivo y depositarlo el día del evento.
+                </p>
+            </section>
+
+            <footer>
+                <p>
+                    Mis XV años serán más especiales si los disfrutas a mi lado,
+                    <br>
+                    ¡muchas gracias, te esperamos!
+                </p>
+            </footer>
+
+        </div> 
+    </main> <button id="music-toggle-btn">
+        <i id="music-toggle-icon" class="fa-solid fa-pause"></i>
+    </button>
+
+
+    <script>
+        // Espera a que todo el contenido de la página se cargue
+        document.addEventListener('DOMContentLoaded', (event) => {
+            
+            // 1. Obtener los elementos que necesitamos
+            const envelope = document.getElementById('envelope-overlay');
+            const invitation = document.getElementById('invitation-content');
+            const music = document.getElementById('background-music');
+            const toggleBtn = document.getElementById('music-toggle-btn');
+            const toggleIcon = document.getElementById('music-toggle-icon');
+
+            // 2. Función para cuando se hace clic en el sobre
+            function openInvitation() {
+                // Intenta reproducir la música (requerido por el navegador)
+                music.play().catch(error => console.log("La reproducción automática fue bloqueada, pero se activará al interactuar."));
+
+                // Ocultar el sobre con un fundido
+                envelope.classList.add('fade-out');
+                
+                // Mostrar la invitación
+                invitation.style.display = 'block';
+                invitation.classList.add('fade-in');
+
+                // Mostrar el botón de control de música
+                toggleBtn.style.display = 'flex';
+
+                // Después de 1 segundo (que dura la animación), oculta el sobre para siempre
+                setTimeout(() => {
+                    envelope.style.display = 'none';
+                }, 1000);
+            }
+
+            // 3. Función para el botón de Play/Pausa
+            function toggleMusic() {
+                if (music.paused) {
+                    music.play();
+                    toggleIcon.className = 'fa-solid fa-pause'; // Cambia icono a pausa
+                } else {
+                    music.pause();
+                    toggleIcon.className = 'fa-solid fa-play'; // Cambia icono a play
+                }
+            }
+
+            // 4. Asignar las funciones a los eventos
+            envelope.addEventListener('click', openInvitation);
+            toggleBtn.addEventListener('click', toggleMusic);
+        });
+    </script>
+
+</body>
 </html>
