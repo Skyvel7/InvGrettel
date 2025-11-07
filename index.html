@@ -51,14 +51,14 @@
         }
 
         .image-overlay-container .overlay-image {
-            position: absolute;
-            top: 50%;
+           position: absolute;
+            top: 5%; /* ¡ACTUALIZADO! Mueve la imagen a la parte superior */
             left: 50%;
-            transform: translate(-50%, -50%); /* Centra la imagen */
-            width: 80%; /* Ajusta el tamaño de la imagen superpuesta */
-            max-width: 400px; /* Tamaño máximo para la superposición */
+            transform: translateX(-50%); /* ¡ACTUALIZADO! Centra solo horizontalmente */
+            width: 80%; 
+            max-width: 400px; 
             height: auto;
-            z-index: 5; /* Para que esté por encima de la foto de fondo */
+            z-index: 5; 
             filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.7));
         }
 
@@ -207,7 +207,7 @@
             width: 100%;
             max-width: 400px; 
             height: auto;
-            margin: 40px auto; 
+            margin: 4px auto; 
             position: relative; 
             z-index: 4; 
         }
@@ -548,7 +548,7 @@
 
             <section class="itinerary section-with-bg">
                 <div class="section-title">
-                    <i class="fa-solid fa-list-ol icon-style"></i>
+                   
                     <h2>Itinerario</h2>
                 </div>
                 <ul class="itinerary-list">
